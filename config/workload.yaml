@@ -3,11 +3,19 @@ kind: Workload
 metadata:
   name: weatherforecast-csharp
   labels:
-    apps.tanzu.vmware.com/workload-type: web
+    apps.tanzu.vmware.com/workload-type: e2e-gitops
     app.kubernetes.io/part-of: weatherforecast-csharp
 spec:
   source:
     git:
-      url: https://github.com/sample-accelerators/csharp-weatherforecast
+      url: https://github.com/akinsanyaleke/weatherforecast-csharp
       ref:
         branch: main
+  env:
+    - name: NAME
+      value: "Cartographer gitops ninja"
+  params:
+    - name: containerPort
+      value: 8080
+    - name: language
+      value: dotnet
