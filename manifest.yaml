@@ -1,0 +1,24 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: weatherforecast-csharp
+  labels:
+    app.kubernetes.io/part-of: weatherforecast-csharp
+    carto.run/workload-name: weatherforecast-csharp
+    app.kubernetes.io/component: run
+spec:
+  template:
+    metadata:
+      annotations:
+        autoscaling.knative.dev/minScale: '1'
+    spec:
+      containers:
+        - name: workload
+          image: leke213.azurecr.io/cartographer-demo-weatherforecast-csharp@sha256:b672cbd6bc439f57de77b07de48d3be63518c45a20da353aed305856e4e606a5
+          env: [{"name": "NAME", "value": "Cartographer gitops ninja"}]
+          ports:
+            - containerPort: 8080
+          securityContext:
+            runAsUser: 1000
+      imagePullSecrets:
+        - name: registry-credentials
