@@ -1,4 +1,4 @@
-# C# Sample Accelerator_
+# C# Sample Accelerator__
 
 A sample accelerator for C#.
 
