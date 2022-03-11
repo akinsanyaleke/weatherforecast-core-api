@@ -23,7 +23,7 @@ spec:
       - env:
         - name: NAME
           value: Cartographer gitops ninja
-        image: leke213.azurecr.io/supplychain-output-images/weatherforecast-csharp-default@sha256:452ffdcac4f660b28cf4a489bddbe49fc75f4e1247f28ab03b934e15347ebeab
+        image: leke213.azurecr.io/supplychain-output-images/weatherforecast-csharp-default@sha256:fc943af628a50e74a921f5c5f84f59e25e96b6f980295ba5ae70ce1b6c33ad03
         name: workload
         resources: {}
         securityContext:
