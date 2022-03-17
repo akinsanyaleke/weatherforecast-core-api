@@ -1,0 +1,24 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: foo-weather-app
+  labels:
+    app.kubernetes.io/part-of: foo-weather-app
+    carto.run/workload-name: foo-weather-app
+    app.kubernetes.io/component: run
+spec:
+  template:
+    metadata:
+      annotations:
+        autoscaling.knative.dev/minScale: '1'
+    spec:
+      containers:
+        - name: workload
+          image: leke213.azurecr.io/cartographer-demo-foo-weather-app@sha256:753a85859cb59aeef7bbdf46f6b024c80c9c09a8ef1145109a8b0de421831f61
+          env: [{"name": "NAME", "value": "Cartographer gitops ninja"}]
+          ports:
+            - containerPort: 8080
+          securityContext:
+            runAsUser: 1000
+      imagePullSecrets:
+        - name: registry-credentials
