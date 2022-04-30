@@ -18,7 +18,7 @@ namespace weatherforecast
 
         public static IHostBuilder CreateHostBuilder(string[] args)
         {
-            string port = Environment.GetEnvironmentVariable("PORT") ?? "5000";
+            string port = Environment.GetEnvironmentVariable("PORT") ?? "5001";
             string url = String.Concat("http://0.0.0.0:", port);
 
             return Host.CreateDefaultBuilder(args)

@@ -8,12 +8,12 @@ using Microsoft.Extensions.Logging;
 namespace weatherforecast.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    //[RoutePrefix("[controller]")]
     public class WeatherForecastController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
+        private static readonly string[] Provinces = new[]
         {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
+            "NL", "PE", "NS", "NB", "QC", "ON", "MB", "SK", "AB", "BC", "YT", "NT", "NU"
         };
 
         private readonly ILogger<WeatherForecastController> _logger;
@@ -24,16 +24,29 @@ namespace weatherforecast.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<WeatherForecast> Get()
+        [Route("[controller]/provinces")]
+        public IEnumerable<WeatherForecast> All()
         {
             var rng = new Random();
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+            return Provinces.Select(prov => new WeatherForecast()
             {
-                Date = DateTime.Now.AddDays(index),
+                Date = DateTime.Now,
                 TemperatureC = rng.Next(-20, 55),
-                Summary = Summaries[rng.Next(Summaries.Length)]
-            })
-            .ToArray();
+                Province = prov
+            });
+        }
+
+        [HttpGet]
+        [Route("[controller]/provinces/{province}")]
+        public WeatherForecast Get(string province)
+        {
+            var rng = new Random();
+            return new WeatherForecast
+            {
+                Date = DateTime.Now,
+                TemperatureC = rng.Next(-20, 55),
+                Province = province
+            };
         }
     }
 }
