@@ -40,7 +40,7 @@ namespace weatherforecast
                 options.AddPolicy(name: MyAllowSpecificOrigins,
                     policy  =>
                     {
-                        policy.WithOrigins("https://tap-gui.tap.aks.lekeakinsanya.com");
+                        policy.WithOrigins("https://tap-gui.tap.aks.lekeakinsanya.com").AllowAnyMethod().AllowAnyHeader();
                     });
             });
         }
