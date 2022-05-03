@@ -9,4 +9,4 @@ spec:
   lifecycle: experimental
   owner: default-team
   dependencyOf:
-  - component:meteorologist
+    - component:meteorologist
