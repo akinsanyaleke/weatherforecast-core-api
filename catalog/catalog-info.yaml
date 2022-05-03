@@ -27,11 +27,11 @@ spec:
     openapi: "3.0.0"
     info:
       version: 1.0.0
-      title: Weather Forecast Partner API
+      title: Weather Forecast Core API
       license:
         name: MIT
     servers:
-      - url: https://weatherforecast-core.tap.aks.lekeakinsanya.com
+      - url: https://weatherforecast-core-api.tap.aks.lekeakinsanya.com
     paths:
       /WeatherForecast/Provinces:
         get:
