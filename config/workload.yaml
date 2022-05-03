@@ -1,11 +1,11 @@
 apiVersion: carto.run/v1alpha1
 kind: Workload
 metadata:
-  name: weatherforecast-csharp
+  name: weatherforecast-core-api
   labels:
     apps.tanzu.vmware.com/workload-type: web
     apps.tanzu.vmware.com/has-tests: "true"
-    app.kubernetes.io/part-of: weatherforecast-csharp
+    app.kubernetes.io/part-of: weatherforecast-svc
 spec:
   params:
   - name: annotations
@@ -13,6 +13,6 @@ spec:
       autoscaling.knative.dev/minScale: "1"
   source:
     git:
-      url: ssh://github.com/akinsanyaleke/weatherforecast-csharp.git
+      url: ssh://github.com/akinsanyaleke/weatherforecast-core-api.git
       ref:
         branch: main

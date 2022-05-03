@@ -1,22 +1,22 @@
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: weatherforecast-csharp
+  name: weatherforecast-core-api
   annotations:
-    "backstage.io/kubernetes-label-selector": "app.kubernetes.io/part-of=weatherforecast-csharp"
+    "backstage.io/kubernetes-label-selector": "app.kubernetes.io/part-of=weatherforecast-svc"
 spec:
   type: service
   lifecycle: experimental
   owner: default-team
   dependencyOf:
-    - component:meteorologist
+    - component:weatherforecast-partner-api
   providesApis:
-    - weatherforecast-api
+    - weatherforecast-core-api
 ---
 apiVersion: backstage.io/v1alpha1
 kind: API
 metadata:
-  name: weatherforecast-api
+  name: weatherforecast-core-api
   description: Retrieve weather forecast per province
 spec:
   type: openapi
@@ -27,11 +27,11 @@ spec:
     openapi: "3.0.0"
     info:
       version: 1.0.0
-      title: Weather Forecast API
+      title: Weather Forecast Partner API
       license:
         name: MIT
     servers:
-      - url: https://weatherforecast-csharp.tap.aks.lekeakinsanya.com
+      - url: https://weatherforecast-core.tap.aks.lekeakinsanya.com
     paths:
       /WeatherForecast/Provinces:
         get:
@@ -39,3 +39,10 @@ spec:
       /WeatherForecast/Provinces/{Province}:
         get:
           summary: Get weather projections for a specific province
+          parameters:
+            - in: path
+              name: Province
+              schema:
+                type: string
+              required: true
+              description: Province to get weather information of
