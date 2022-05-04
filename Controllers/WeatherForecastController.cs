@@ -9,7 +9,7 @@ using Microsoft.Extensions.Logging;
 namespace weatherforecast.Controllers
 {
     [ApiController]
-    [EnableCors("CorsApi")]
+    [EnableCors("_myAllowSpecificOrigins")]
     //[RoutePrefix("[controller]")]
     public class WeatherForecastController : ControllerBase
     {
