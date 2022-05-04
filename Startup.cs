@@ -54,7 +54,7 @@ namespace weatherforecast
                 .AllowAnyHeader()
                 .AllowAnyOrigin());
             
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             app.UseRouting();
 
