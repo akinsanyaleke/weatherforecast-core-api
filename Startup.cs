@@ -48,6 +48,12 @@ namespace weatherforecast
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "weatherforecast v1"));
             }
 
+            // global cors policy
+            app.UseCors(x => x
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .AllowAnyOrigin());
+            
             app.UseHttpsRedirection();
 
             app.UseRouting();
@@ -56,11 +62,7 @@ namespace weatherforecast
             
             //app.UseCors(MyAllowSpecificOrigins);
 
-            // global cors policy
-            app.UseCors(x => x
-                .AllowAnyMethod()
-                .AllowAnyHeader()
-                .AllowAnyOrigin());
+
             
             app.UseEndpoints(endpoints =>
             {
