@@ -23,7 +23,7 @@ namespace weatherforecast
         }
 
         public IConfiguration Configuration { get; }
-        private const string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+        //private const string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -34,16 +34,8 @@ namespace weatherforecast
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "weatherforecast", Version = "v1" });
             });
-            
-            services.AddCors(options =>
-            {
-                options.AddPolicy(name: MyAllowSpecificOrigins,
-                    policy  =>
-                    {
-                        //policy.WithOrigins("https://tap-gui.tap.aks.lekeakinsanya.com").AllowAnyMethod().AllowAnyHeader();
-                        policy.WithOrigins().AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
-                    });
-            });
+
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -62,8 +54,14 @@ namespace weatherforecast
 
             app.UseAuthorization();
             
-            app.UseCors(MyAllowSpecificOrigins);
+            //app.UseCors(MyAllowSpecificOrigins);
 
+            // global cors policy
+            app.UseCors(x => x
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .AllowAnyOrigin());
+            
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
